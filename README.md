@@ -58,6 +58,24 @@ Optionally, you can also follow these steps to create a new branch on your fork:
 8. Click the **Code** button and create a new Codespace (if you don’t already have one).  
    - Make sure the Codespace is created from the **current branch**.
   
+## Prepare Codespace Environment
+Follow these steps to installs required Python packages needed for the app to run:
+1. **Open the terminal** inside your Codespace.
+2. Run the command:  
+   ```bash
+   pip install -r requirements.txt
+   ```  
+3. Upgrade spcific packages if needed:
+   - If the app requires newer versions of some packages (such as facing numpy incompatibility) 
+   ```bash
+   pip install --upgrade pandas scipy
+   ```  
+4. Install specific packages:
+   - Text splitter method: SpaCy
+   ```bash
+   pip install spacy
+   python -m spacy download en_core_web_sm
+   ``` 
 ## Running a Streamlit App on Codespaces  
 Follow these steps to launch and view your Streamlit app in GitHub Codespaces:
 1. **Open the terminal** inside your Codespace.
@@ -65,7 +83,7 @@ Follow these steps to launch and view your Streamlit app in GitHub Codespaces:
    ```bash
    streamlit run your-file-name.py
    ```  
-   **(Replace `your-file-name.py` with the actual name of your Streamlit app file, e.g., `hello_app.py`.)**
+   **(Replace `your-file-name.py` with the actual name of the Streamlit app file. In this case, `chat_with_me.py`.)**
 3. After pressing **Enter**, a popup should appear in the bottom-right corner of Codespace editor.  
    - Click **“Open in Browser”** to view your app.  
 
@@ -83,10 +101,28 @@ You will receive an individual API Key for class assignments. To prevent acciden
    ```bash
    export API_KEY="your_actual_API_KEY"
    ```
-3. If you want to run the Streamlit app and set up the key at the same time, run both commands together:
+3. If you want to run the Streamlit app and set up the key at the same time, run both commands together: (Please use this method to prevent any technical issue)
    ```bash
-   API_KEY="your_actual_API_KEY" streamlit run your-file-name.py
+   API_KEY="your_actual_API_KEY" streamlit run chat_with_me.py
    ```
 
 ## Troubleshooting
 - The Jupyter extension should install automatically. If you still cannot select a Python kernel on Jupyter Notebook: Go to the left sidebar >> **Extensions** >> search for **Jupyter** >> reload window (or reinstall it).   
+
+## Overview of the Application 
+This is a **RAG (Retrieval-Augmented Generation)** chatbot application. It utilizes tool including **Streamlit, LangChain,** and **LangGraph** with support by **OpenAI's GPT model**. Mainly it allow users to upload one or multiple files at once. Support both *.pdf* and/or *.txt* files. User asks their natural/plain questions about the content they upload, the application provide relevant information based on the upload content using the OpenAI LLM. As a bonus, it also cite the source where it retrieve the information.
+### Key Application Features
+1. Streamlit Interactive Chat Interface
+   - A clean & intuitive Q&A experience build with **Streamlit**
+   - Maintain the chat history for user to look back
+2. Support Multiple Document Upload and Handle
+   - Allow to upload and process more than one document at a time
+   - Support both **PDFs** and **text** files
+3. Text Splitting & Chunking
+   - Split long documents with consideration of context-aware to ensure higher accurate retrieval
+   - Flexible with splitting strategies depend on file types:
+      - *PDF files*: utilize **RecursiveCharacterTextSplitter**, which is more strucutre-based
+      - *text files*: utilize **SpacyTextSplitter**, which is semantic/sentence-based
+4. Source-Cited Answers
+   - Each answer includes in-text citation. 
+   - Referencing the exact file name and pages if available (e.g., PINN.pdf (page 3) or notes.txt)
