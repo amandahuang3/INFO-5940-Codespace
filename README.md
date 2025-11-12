@@ -63,9 +63,8 @@ Follow these steps to launch and view your Streamlit app in GitHub Codespaces:
 1. **Open the terminal** inside your Codespace.
 2. Run the command:  
    ```bash
-   streamlit run your-file-name.py
+   streamlit run assign_2.py
    ```  
-   **(Replace `your-file-name.py` with the actual name of your Streamlit app file, e.g., `hello_app.py`.)**
 3. After pressing **Enter**, a popup should appear in the bottom-right corner of Codespace editor.  
    - Click **“Open in Browser”** to view your app.  
 
@@ -79,14 +78,17 @@ Follow these steps to launch and view your Streamlit app in GitHub Codespaces:
 ## Setting Your API Key in GH Codespaces
 You will receive an individual API Key for class assignments. To prevent accidental exposure online, please follow the steps below to securely insert your key in the terminal.
 1. **Open the terminal** inside your Codespace.
-2. Run the command to temporarily set your API Key for this session:  
+2. Run the command to temporarily set your OpenAI API Key for this session:  
    ```bash
-   export API_KEY="your_actual_API_KEY"
+   export OPENAI_API_KEY="your_actual_API_KEY"
    ```
 3. If you want to run the Streamlit app and set up the key at the same time, run both commands together:
    ```bash
-   API_KEY="your_actual_API_KEY" streamlit run your-file-name.py
+   OPENAI_API_KEY="your_actual_API_KEY" streamlit run assign_2.py
    ```
-
+4. Add your Tavily API key in .env
+   ```bash
+   TAVILY_API_KEY="your_TAVILY_API_KEY"
+   ```
 ## Troubleshooting
 - The Jupyter extension should install automatically. If you still cannot select a Python kernel on Jupyter Notebook: Go to the left sidebar >> **Extensions** >> search for **Jupyter** >> reload window (or reinstall it).   
